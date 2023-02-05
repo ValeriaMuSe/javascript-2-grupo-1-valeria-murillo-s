@@ -20,8 +20,3 @@ function counter() {
 }
 
 const counterfunction = counter()
-
-// increasebtn.addEventListener("click", function(){
-//   const counterfunction = counter();
-//   counterfunction.increase
-// })
