@@ -114,9 +114,9 @@ function EstudianteConstructor(nombre, apellidos, fechaNacimiento, id, nuevoIngr
     this.cursosCursados.push(curso)
     this.cursosCursados.push(nota)
     if (nota > 70){
-      this.cursosCursados.push("aprobado");
+      this.cursosCursados.push("estado: aprobado");
     } else if(nota < 70){
-      this.cursosCursados.push("desaprobado");
+      this.cursosCursados.push("estado: desaprobado");
     }
   }
 }
