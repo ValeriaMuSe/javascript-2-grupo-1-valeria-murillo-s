@@ -110,7 +110,7 @@ function EstudianteConstructor(nombre, apellidos, fechaNacimiento, id, nuevoIngr
     // this.cursosMatriculados = this.cursosMatriculados.filter(item => item !== curso); // devuelve un array con los elementos que cumplen con la condición
   }
 
-  this.cursoCursado = function(curso, nota, aprobado, desaprobado) {
+  this.cursoCursado = function(curso, nota) {
     this.cursosCursados.push(curso)
     this.cursosCursados.push(nota)
     if (nota > 70){
