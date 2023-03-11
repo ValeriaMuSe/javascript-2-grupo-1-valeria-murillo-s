@@ -122,9 +122,8 @@ const bookstore1 = new Bookstore('International Library', 'Calle 1');
 // }
 
 const sidebar = document.getElementById('sidebar');
-const list = document.querySelector('#list');
-
 const menu = ['Show Books', 'Show Comics', 'Add book', 'Add Comic'];
+const list = document.querySelector('#list');
 
 // Put the title
 
@@ -163,49 +162,18 @@ addIcon();
 
 // Put the list
 
-const printBooks = () => {
+const generalList = () => {
   list.insertAdjacentHTML(
     'beforeend',
-    `<li onclick="showBooks()" class="list" >
-      ${menu[0]}
-    </li>`
+    `<li onclick="showBooks()" class="list">${menu[0]}</li>,
+     <li onclick="showComics()" class="list">${menu[1]}</li>,
+     <li onclick="addBook()" class="list">${menu[2]}</li>,
+     <li onclick="addComic()" class="list">${menu[3]}</li>`
   )
 }
 
-printBooks();
+generalList();
 
-const printComics = () => {
-  list.insertAdjacentHTML(
-    'beforeend',
-    `<li onclick="showComics()" class="list" >
-      ${menu[1]}
-    </li>`
-  )
-}
-
-printComics();
-
-const addBooks = () => {
-  list.insertAdjacentHTML(
-    'beforeend',
-    `<li onclick="addBook()" class="list">
-      ${menu[2]}
-    </li>`
-  )
-}
-
-addBooks();
-
-const addComics = () => {
-  list.insertAdjacentHTML(
-    'beforeend',
-    `<li onclick="addComic()" class="list">
-      ${menu[3]}
-    </li>`
-  )
-}
-
-addComics();
 
 // Add the books or comics
 
