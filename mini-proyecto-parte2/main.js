@@ -1,179 +1,50 @@
-class Bookstore {
-  #bookstoreName;
-  #address;
-  #books;
-  #comics;
-  constructor(bookstoreName, address) {
-    this.#bookstoreName = bookstoreName;
-    this.#address = address;
-    this.#books = [];
-    this.#comics = [];
-  }
-
-
-  // getters
-  get getBooks() {
-    return this.#books;
-  }
-
-  get getComics() {
-    return this.#comics;
-  }
-
-  get getName() {
-    return this.#bookstoreName
-  }
-
-  // setters
-  set setBookstoreName(name) {
-    this.#bookstoreName = name;
-  }
-
-  set setAddress(address) {
-    this.#address = address;
-  }
-
-  set setBooks(book) {
-    this.#books.push(book);
-  }
-
-  set setComics(comic) {
-    this.#comics.push(comic);
-  }
-}
-
-class Book {
-  #title;
-  #author;
-  #price;
-  #stock;
-  #year;
-  
-  constructor(title, author, price, stock, year) {
-    this.#title = title;
-    this.#author = author;
-    this.#price = price;
-    this.#stock = stock;
-    this.#year = year;
-  }
-
-  getInfo() {
-    return {
-      title: this.#title,
-      author: this.#author,
-      price: this.#price,
-      year: this.#year,
-      stock: !this.#stock ? 'No hay ejemplares disponibles' : this.#stock
-    }
-  }
-
-  // setters
-  set setStock(stock) {
-    this.#stock = stock;
-  }
-
-  set setYear(year) {
-    this.#year = year;
-  }
-}
-
-class Comic extends Book {
-  #illustrator;
-  #publisher;
-  #volume;
-  constructor(title, author, price, stock, year, illustrator, publisher, volume) {
-    super(title, author, price, stock, year);
-    this.#illustrator = illustrator;
-    this.#publisher = publisher;
-    this.#volume = volume;
-  }
-
-  getInfo () {
-    const info = super.getInfo(); 
-    return {
-      ...info,
-      illustrator: this.#illustrator,
-      publisher: this.#publisher,
-      volume: this.#volume
-    }
-  }
-}
+import Bookstore from './modules/Bookstore.js';
+import Book from './modules/Book.js';
+import Comic from './modules/Comic.js';
 
 const bookstore1 = new Bookstore('International Library', 'Calle 1');
 
-// const addBook = () => {
-//   const book = new Book('El principito', 'Antoine de Saint', 100, 10, 1943);
-//   bookstore1.setBooks = book.getInfo();
-//   console.log('Add book')
-// } 
-
-// const addComic = () => {
-//   const comic = new Comic('Batman', 'bob kane', 200, 5, '1939', 'Bob kane', 'DC Comics', 1);
-//   bookstore1.setComics = comic.getInfo();
-//   console.log('Add Comic')
-// }
-
-// const showProducts = () => {
-//   console.log('Books')
-//   console.log(bookstore1.getBooks);
-
-//   console.log('Comics')
-//   console.log(bookstore1.getComics);
-// }
-
 const sidebar = document.getElementById('sidebar');
 const menu = ['Show Books', 'Show Comics', 'Add book', 'Add Comic'];
-const list = document.querySelector('#list');
 
 // Put the title
 
 const printBookstoreName = () => {
   sidebar.insertAdjacentHTML(
     'afterbegin',
-    `<h1 class="title">
+    `<img class="library-icon" src="img/book-title-icon.svg" alt="">
+    <h1 class="title">
       ${bookstore1.getName}
     </h1>`,
   )
 }
 
-printBookstoreName();
 
-// Put the icons 
-
-const showIcon = () => {
-  list.insertAdjacentHTML(
-    'afterbegin',
-    `<img class="icon show-icon" src="img/show-icon.png" alt="">
-    <img class="icon show-icon-comic" src="img/show-icon.png" alt="">`
-  )
+const initialize = () => {
+  printBookstoreName();
+  displayMenu();
+  menuFunctionality();
 }
 
-showIcon();
-
-const addIcon = () => {
-  list.insertAdjacentHTML(
-    'afterbegin',
-    `<img class="icon add-icon" src="img/add-icon.png" alt="">
-    <img class="icon add-icon-comic" src="img/add-icon.png" alt="">`
-  )
+const createMenu = () => {
+  let menuHtml = '';
+  menu.forEach((elem, index) => {
+    menuHtml += `<li class="menu-item" id="${index}"><img class="icon" src="img/book-icon.svg" alt="">${elem}</li>`
+  });
+  
+  return menuHtml;
 }
-
-addIcon();
-
-// Put the list
-
-const generalList = () => {
-  list.insertAdjacentHTML(
+ 
+const displayMenu = () => {
+  sidebar.insertAdjacentHTML(
     'beforeend',
-    `<li onclick="showBooks()" class="list">${menu[0]}</li>,
-     <li onclick="showComics()" class="list">${menu[1]}</li>,
-     <li onclick="addBook()" class="list">${menu[2]}</li>,
-     <li onclick="addComic()" class="list">${menu[3]}</li>`
-  )
+    `<ul class="menu">${createMenu()}</ul>`
+  );
 }
 
-generalList();
 
+
+initialize()
 
 // Add the books or comics
 
@@ -189,7 +60,7 @@ const addComic = () => {
   alert('Comic added')
 }
 
-// Show the books or comics
+// // Show the books or comics
 
 const showBooks = () => {
   console.log('Books');
@@ -200,3 +71,104 @@ const showComics = () => {
   console.log('Comics');
   console.log(bookstore1.getComics);
 }
+
+
+// Lo de la profe
+// (function () {
+//   const bookstore1 = new Bookstore('Libreria 1', 'Calle 1');
+//   const sidebar = document.getElementById('sidebar');
+//   const menu = ['Show Books', 'Show Comics', 'Add book', 'Add Comic'];
+
+//   const initialize = () => {
+//     printBookstoreName();
+//     displayMenu();
+//     menuFunctionality();
+//   }
+  
+//   const printBookstoreName = () => {
+//     sidebar.insertAdjacentHTML(
+//       'afterbegin',
+//       `<h2 class="title">
+//         <img src="./img/logo.svg" class="logo"/>
+//         ${bookstore1.getName}
+//       </h2>`
+//     )
+//   }
+  
+//   const createMenu = () => {
+//     let menuHtml = '';
+//     menu.forEach((elem, index) => {
+//       menuHtml += `<li class="menu-item"> 
+//         <a href="#" id="${index}">${elem}</a>
+//       </li>`
+//     });
+  
+//     return menuHtml;
+//   }
+  
+//   const displayMenu = () => {
+//     sidebar.insertAdjacentHTML(
+//       'beforeend',
+//       `<ul class="menu">${createMenu()}</ul>`
+//     );
+//   }
+  
+//   const menuFunctionality = () => {
+//     const items = document.querySelectorAll('.menu-item');
+//     items.forEach((item) => {
+//       item.addEventListener('click', (event) => {
+//         // e.stopPropagation(); // esto es para evitar que el evento se extienda/propague al los elementos padres
+//         event.preventDefault(); // esto es para evitar que se recargue la página cuando se hace click en el elemento, en este al elemeto li del menu
+  
+//         const { id } = event.target
+  
+//         switch (id) {
+//           case '0':
+//             showBooks();
+//             break;
+//           case '1':
+//             showComics();
+//             break;
+//           case '2':
+//             addBooks();
+//             break;
+//           case '3':
+//             addComics();
+//             break;
+//           default:
+//             console.log('That option does not exist');
+//             break;
+//         }
+//       });
+//     });
+//   }
+  
+  
+//   const showBooks = () => {
+//     console.log('Show Books');
+//     console.log(bookstore1.getBooks)
+//     const books  = bookstore1.getBooks;
+//   }
+  
+//   const showComics = () => {
+//     console.log('Show Comics');
+//     console.log(bookstore1.getComics)
+//   }
+  
+//   const addBooks = () => {
+//     const title = prompt('Title');
+//     const author = prompt('Author');
+//     const price = prompt('Price');
+//     const stock = prompt('Stock');
+//     const year = prompt('Year');
+  
+//     const book = new Book(title, author, price, stock, year);
+//     bookstore1.setBooks = book.getInfo();
+//   }
+  
+//   const addComics = () => {
+//     console.log('Add Comics');
+//   }
+  
+//   initialize();
+// })();
