@@ -42,25 +42,36 @@ const displayMenu = () => {
   );
 }
 
-
+  const menuFunctionality = () => {
+    const items = document.querySelectorAll('.menu-item');
+    items.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        event.preventDefault(); // esto es para evitar que se recargue la página cuando se hace click en el elemento, en este al elemeto li del menu
+  
+        const { id } = event.target
+  
+        switch (id) {
+          case '0':
+            showBooks();
+            break;
+          case '1':
+            showComics();
+            break;
+          case '2':
+            addBooks();
+            break;
+          case '3':
+            addComics();
+            break;
+          default:
+            console.log('That option does not exist');
+            break;
+        }
+      });
+    });
+  }
 
 initialize()
-
-// Add the books or comics
-
-const addBook = () => {
-  const book = new Book(prompt("Book title"),prompt("Book author"),prompt("Book price"),prompt("Book stock"),prompt("Book year"));
-  bookstore1.setBooks = book.getInfo();
-  alert('Book added');
-} 
-
-const addComic = () => {
-  const comic = new Comic(prompt("Comic title"),prompt("Comic author"),prompt("Comic price"),prompt("Comic stock"),prompt("Comic year"),prompt("Comic illustrator"),prompt("Comic publisher"),prompt("Comic volume"));
-  bookstore1.setComics = comic.getInfo();
-  alert('Comic added')
-}
-
-// // Show the books or comics
 
 const showBooks = () => {
   console.log('Books');
@@ -71,6 +82,32 @@ const showComics = () => {
   console.log('Comics');
   console.log(bookstore1.getComics);
 }
+
+  const addBooks = () => {
+    const title = prompt('Title');
+    const author = prompt('Author');
+    const price = prompt('Price');
+    const stock = prompt('Stock');
+    const year = prompt('Year');
+  
+    const book = new Book(title, author, price, stock, year);
+    bookstore1.setBooks = book.getInfo();
+  }
+
+  const addComics = () => {
+    const title = prompt('Title');
+    const author = prompt('Author');
+    const price = prompt('Price');
+    const stock = prompt('Stock');
+    const year = prompt('Year');
+    const illustrator = prompt('Illustrator');
+    const volume = prompt('Volume');
+    const publisher = prompt('Publisher');
+
+  
+    const comic = new Comic(title, author, price, stock, year, illustrator, volume, publisher);
+    bookstore1.setBooks = comic.getInfo();
+  }
 
 
 // Lo de la profe
